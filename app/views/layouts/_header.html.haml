@@ -11,10 +11,6 @@
           .fa.fa-home
           Home
           %ul.navbar-nav.me-auto
-        = link_to home_privacy_policy_path, class: "nav-link #{'active fw-bold' if current_page?(root_path)}" do
-          .fa.fa-home
-          Privacy Policy
-          %ul.navbar-nav.me-auto
         = link_to courses_path, class: "nav-link #{'active fw-bold' if current_page?(root_path)}" do
           .fa.fa-book
           Courses
@@ -22,6 +18,7 @@
           = link_to new_course_path, class: 'nav-link' do
             .fa.fa-plus
             New Course
+  
 
         .form-inline.my-2.my-lg-0
           = form_tag(courses_path, method: :get) do

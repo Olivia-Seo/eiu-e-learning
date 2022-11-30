@@ -1,10 +1,58 @@
-.container-fluid
-  %h1 StaticPages#landing_page
-  %p Find me in app/views/static_pages/landing_page.html.erb
-  = link_to "Privacy Policy", privacy_policy_path
- 
-  = link_to courses_path,  class: "btn btn-success" do
-    .fa.fa-book
-    Courses
+.jumbotron
+  .display-4
+    What do you want to learn today?
 
-    
+  .p-4
+
+.card-group
+  .card.card-body
+    %h1
+      .fa.fa-graduation-cap
+    = Course.count
+    online courses
+    .row
+    Explore a variety of fresh topics
+  .card.card-body
+    %h1
+      .fa.fa-chalkboard-teacher
+      /.fa.fa-brain
+    = Course.distinct.count(:user_id)
+    expert instructors
+    .row
+    Find the right instructor for you
+  .card.card-body
+    %h1
+      .fa.fa-user-graduate
+    = User.count
+    active learners
+    .row
+    Join the knowledge sharing community
+  .card.card-body
+    %h1
+      .fa.fa-infinity
+    Lifetime access
+    .row
+    Learn on your schedule
+
+%hr
+%h2
+  Popular courses
+.card-columns
+  - @courses.each do |course|
+    = render 'courses/course', course: course
+
+%hr
+%h2 
+  Top rated courses
+.card-columns
+  - @courses.each do |course|
+    = render 'courses/course', course: course
+
+%hr
+%h2 
+  Latest courses
+.card-columns
+  - @latest_couses.each do |course|
+    = render 'courses/course', course: course
+
+%hr
