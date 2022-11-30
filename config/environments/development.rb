@@ -2,7 +2,7 @@ require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
   config.hosts << "e21f166e5b034044bfba7566d34fd5a3.vfs.cloud9.ap-northeast-1.amazonaws.com"
-  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  config.action_mailer.default_url_options = { host: 'https://e21f166e5b034044bfba7566d34fd5a3.vfs.cloud9.ap-northeast-1.amazonaws.com' }
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded any time
