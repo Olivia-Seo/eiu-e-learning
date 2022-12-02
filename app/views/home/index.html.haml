@@ -37,21 +37,21 @@
 %hr
 %h2
   Popular courses
-.card-columns
+.card-group
   - @courses.each do |course|
     = render 'courses/course', course: course
 
 %hr
 %h2 
   Top rated courses
-.card-columns
+.card-group
   - @courses.each do |course|
     = render 'courses/course', course: course
 
 %hr
 %h2 
   Latest courses
-.card-columns
+.card-group
   - @latest_couses.each do |course|
     = render 'courses/course', course: course
 
