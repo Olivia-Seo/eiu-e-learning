@@ -1,23 +1,26 @@
 class UsersController < ApplicationController
   def index
-      @users = User.all.order(created_at: :desc )
+      #@users = User.all.order(created_at: :desc )
+      
+      @q = User.ransack(params[:q])
+       @users = @q.result(distinct: true)
   end
   
-  def create
+  #def create
     # Create the user from params
-    @user = User.new(user_params)
-    if @user.save
+   # @user = User.new(user_params)
+    #if @user.save
       # Deliver the signup email
-      UserNotifierMailer.send_signup_email(@user).deliver
-      redirect_to(@user, :notice => 'User created')
-    else
-      render :action => 'new'
-    end
-  end
+     # UserNotifierMailer.send_signup_email(@user).deliver
+      #redirect_to(@user, :notice => 'User created')
+    #else
+     # render :action => 'new'
+    #end
+  #end
   
-  private
+  #private
   
-  def user_params
-    params.require(:user).permit(:name, :email, :login)
-  end
+  #def user_params
+   # params.require(:user).permit(:name, :email, :login)
+  #end
 end
