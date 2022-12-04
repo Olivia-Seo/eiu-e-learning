@@ -1,0 +1,22 @@
+%hr
+%footer
+  .container
+    .row
+      .col-md-4
+        Copyright
+        © 
+        = Time.now.year
+        CoursePlatform Sp. z o.o.
+        .row
+        .fa.fa-envelope
+        = mail_to 'phu.vo.set17@eiu.edu.vn'
+        .row
+      .col-md-4
+        Privacy policy
+        .row
+        Terms and conditions
+      .col-md-4
+        About us
+        .row
+        = link_to 'Create Your Class', new_course_path
+%br

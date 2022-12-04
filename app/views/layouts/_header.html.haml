@@ -36,6 +36,10 @@
 
 
       %ul.navbar-nav.ms-auto
+        %li.nav-item{class: "#{'active font-weight-bold' if current_page?(home_activity_path)}"}
+          = link_to home_activity_path, class: 'nav-link' do
+            .fa.fa-bell
+            Activity
         - if current_user
           %li.nav-item.dropdown
             %a#navbarDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", :href => "#", :role => "button"}
