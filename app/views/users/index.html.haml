@@ -1,14 +1,9 @@
 %h3
   .text-center
-    Users
-    .badge.badge-info
+    USER MANAGEMENT DASHBOARD
+    .badge.bg-info
       = @users.count
 %p
-
-
-.row.row-cols-1.row-cols-md-3.g-4
-  - @users.each do |user|
-    = render 'users/user', user: user
 
 .form-inline
   = search_form_for @q do |f|
@@ -41,3 +36,7 @@
         %td= user.last_sign_in_at
         %td= user.current_sign_in_ip
         %td= user.last_sign_in_ip
+        
+.row.row-cols-1.row-cols-md-3.g-4
+  - @users.each do |user|
+    = render 'users/user', user: user        
