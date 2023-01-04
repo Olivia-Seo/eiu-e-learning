@@ -87,6 +87,9 @@ GEM
       responders
       warden (~> 1.2.3)
     erubi (1.11.0)
+    exception_notification (4.5.0)
+      actionmailer (>= 5.2, < 8)
+      activesupport (>= 5.2, < 8)
     faker (3.0.0)
       i18n (>= 1.8.11, < 2)
     ffi (1.15.5)
@@ -255,6 +258,7 @@ DEPENDENCIES
   byebug
   capybara (>= 3.26)
   devise
+  exception_notification
   faker
   friendly_id (~> 5.2.4)
   haml-rails (~> 2.0)
