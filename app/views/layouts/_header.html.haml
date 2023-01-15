@@ -21,7 +21,11 @@
         %li.nav-item{class: "#{'active font-weight-bold' if current_page?(users_path)}"}
           = link_to users_path, class: 'nav-link' do
             .fa.fa-users
-            Users    
+            Users 
+        %li.nav-item{class: "#{'active font-weight-bold' if current_page?(enrollments_path)}"}
+          = link_to enrollments_path, class: 'nav-link' do
+            .fa.fa-lock-open
+            Enrollments    
   
         
 
@@ -31,9 +35,6 @@
               = text_field_tag :title, params[:title], autocomplete: 'off', placeholder: "Find a course", class: 'form-control-sm'
               %span.input-group-append
                 %button.btn.btn-outline-success{:type => "submit"} Search
-                
-          
-
 
       %ul.navbar-nav.ms-auto
         %li.nav-item{class: "#{'active font-weight-bold' if current_page?(home_activity_path)}"}
@@ -46,6 +47,9 @@
               .fa.fa-user
               %b= current_user.username
             %ul.dropdown-menu{"aria-labelledby" => "navbarDropdown"}
+              = link_to user_path(current_user), class: "dropdown-item" do
+                .fa.fa-user
+                %b My profile
               = link_to edit_user_registration_path, class: "dropdown-item #{'active fw-bold' if current_page?(edit_user_registration_path)}" do
                 .fa.fa-cog
                 %b Account settings

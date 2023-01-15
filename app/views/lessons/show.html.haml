@@ -1,3 +1,11 @@
+- content_for :title do
+  EiuELearning
+  \/
+  Course
+  = @course.title
+  \/
+  Lesson
+  = @lesson.title
 = link_to 'Courses', courses_path
 \/
 = link_to @lesson.course.title, course_path(@lesson.course)

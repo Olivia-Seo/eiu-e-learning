@@ -1,3 +1,8 @@
+- content_for :title do
+  EiuELearning
+  \| 
+  All Courses
+
 %h3
   .text-center
     Courses
@@ -33,6 +38,7 @@
     .card-columns
       - @courses.each do |course|
         = render 'courses/course', course: course
+    != pagy_bootstrap_nav(@pagy)    
 
 %br
 
