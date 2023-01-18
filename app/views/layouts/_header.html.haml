@@ -10,25 +10,70 @@
         = link_to root_path, class: "nav-link #{'active fw-bold' if current_page?(root_path)}" do
           .fa.fa-home
           Home
+        - if current_user
           %ul.navbar-nav.me-auto
-        = link_to courses_path, class: "nav-link #{'active fw-bold' if current_page?(root_path)}" do
-          .fa.fa-graduation-cap
-          Courses
-        %li.nav-item{class: "#{'active font-weight-bold' if current_page?(new_course_path)}"}
-          = link_to new_course_path, class: 'nav-link' do
-            .fa.fa-plus
-            New Course
-        %li.nav-item{class: "#{'active font-weight-bold' if current_page?(users_path)}"}
-          = link_to users_path, class: 'nav-link' do
-            .fa.fa-users
-            Users 
-        %li.nav-item{class: "#{'active font-weight-bold' if current_page?(enrollments_path)}"}
-          = link_to enrollments_path, class: 'nav-link' do
-            .fa.fa-lock-open
-            Enrollments    
-  
+            = link_to courses_path, class: "nav-link #{'active fw-bold' if current_page?(root_path)}" do
+              .fa.fa-graduation-cap
+              Courses
         
-
+        - if current_user 
+          - if current_user.has_role?(:admin) 
+            %li.nav-item.dropdown
+              %a#navbarDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", :href => "#", :role => "button"}
+                .fa.fa-user
+                %b Admin
+              %ul.dropdown-menu{"aria-labelledby" => "navbarDropdown"}
+                = link_to users_path,  class: "dropdown-item" do
+                  .fa.fa-users
+                  %b Users 
+                  .badge.bg-info
+                    = User.count
+                = link_to enrollments_path, class: "dropdown-item" do
+                  .fa.fa-lock-open
+                  %b Enrollments
+                  .badge.bg-info
+                    = Enrollment.count
+                = link_to activity_path, class: "dropdown-item" do
+                  .fa.fa-bell
+                  %b Activity   
+        - if current_user 
+          - if current_user.has_role?(:student) 
+            %li.nav-item.dropdown
+              %a#navbarDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", :href => "#", :role => "button"}
+                .fa.fa-graduation-cap
+                %b Learning
+              %ul.dropdown-menu{"aria-labelledby" => "navbarDropdown"}
+                = link_to purchased_courses_path,  class: "dropdown-item" do
+                  .fa.fa-graduation-cap
+                  Purchased Courses
+                  .badge.bg-info
+                    = current_user.enrollments.count
+                = link_to pending_review_courses_path,  class: "dropdown-item" do
+                  .fa.fa-star
+                  Pending Review 
+                  .badge.bg-info
+                    = current_user.enrollments.pending_review.count
+        - if current_user 
+          - if current_user.has_role?(:teacher) 
+            %li.nav-item.dropdown
+              %a#navbarDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", :href => "#", :role => "button"}
+                .fa.fa-chalkboard-teacher
+                %b Teaching
+              %ul.dropdown-menu{"aria-labelledby" => "navbarDropdown"}
+                = link_to created_courses_path,  class: "dropdown-item" do
+                  .fa.fa-graduation-cap
+                  My courses
+                  .badge.bg-info
+                    = current_user.courses.count
+                = link_to my_students_enrollments_path,  class: "dropdown-item" do
+                  .fa.fa-users
+                  My students  
+                  .badge.bg-info
+                    = Enrollment.joins(:course).where(courses: {user: current_user}).count
+                = link_to new_course_path,  class: "dropdown-item" do
+                  .fa.fa-plus
+                  New Course   
+  
         .form-inline.my-2.my-lg-0
           = form_tag(courses_path, method: :get) do
             .input-group
@@ -37,18 +82,14 @@
                 %button.btn.btn-outline-success{:type => "submit"} Search
 
       %ul.navbar-nav.ms-auto
-        %li.nav-item{class: "#{'active font-weight-bold' if current_page?(home_activity_path)}"}
-          = link_to home_activity_path, class: 'nav-link' do
-            .fa.fa-bell
-            Activity
         - if current_user
           %li.nav-item.dropdown
             %a#navbarDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", :href => "#", :role => "button"}
               .fa.fa-user
               %b= current_user.username
             %ul.dropdown-menu{"aria-labelledby" => "navbarDropdown"}
-              = link_to user_path(current_user), class: "dropdown-item" do
-                .fa.fa-user
+              = link_to user_path(current_user), class: "dropdown-item #{'active fw-bold' if current_page?(edit_user_registration_path)}" do
+                .fa.fa-cog
                 %b My profile
               = link_to edit_user_registration_path, class: "dropdown-item #{'active fw-bold' if current_page?(edit_user_registration_path)}" do
                 .fa.fa-cog
@@ -56,10 +97,12 @@
               = link_to destroy_user_session_path, method: :delete, class: "dropdown-item" do
                 .fa.fa-sign-out-alt
                 %b Sign out
+                
+            
         - else
           %ul.navbar-nav.mr-auto
-          %ul.navbar-nav.mr-right
-            %li.nav-item{class: "#{'active font-weight-bold' if current_page?(new_user_registration_path)}"}
-              = link_to 'Sign Up', new_user_registration_path, class: 'nav-link'
-            %li.nav-item{class: "#{'active font-weight-bold' if current_page?(new_user_session_path)}"}
-              = link_to 'Log In', new_user_session_path, class: 'nav-link'
+            %ul.navbar-nav.mr-right
+              %li.nav-item{class: "#{'active font-weight-bold' if current_page?(new_user_registration_path)}"}
+                = link_to 'Sign Up', new_user_registration_path, class: 'nav-link'
+              %li.nav-item{class: "#{'active font-weight-bold' if current_page?(new_user_session_path)}"}
+                = link_to 'Log In', new_user_session_path, class: 'nav-link'

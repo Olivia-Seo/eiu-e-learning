@@ -27,7 +27,6 @@ class User < ApplicationRecord
       self.add_role(:student)
     else
       self.add_role(:student) if self.roles.blank?
-      self.add_role(:teacher) 
     end
   end
   
