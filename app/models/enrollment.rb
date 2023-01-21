@@ -1,6 +1,6 @@
 class Enrollment < ApplicationRecord
-  belongs_to :course
-  belongs_to :user
+  belongs_to :course, counter_cache: true
+  belongs_to :user, counter_cache: true
   
   validates :user, :course, presence: true
   
@@ -13,6 +13,8 @@ class Enrollment < ApplicationRecord
   validate :cant_subscribe_to_own_course  #user can't create a subscription if course.user == current_user.id
   
   scope :pending_review, -> { where(rating: [0, nil, ""], review: [0, nil, ""]) }
+  scope :reviewed, -> { where.not(review: [0, nil, ""]) }
+  scope :latest_good_reviews, -> { order(rating: :desc, created_at: :desc).limit(3) }
   
   extend FriendlyId
   friendly_id :to_s, use: :slugged

@@ -4,7 +4,11 @@ module CoursesHelper
       if course.user == current_user
         link_to "You created this course. View analytics", course_path(course)
       elsif course.enrollments.where(user: current_user).any?
-        link_to "You bought this course. Keep learning", course_path(course)
+        link_to course_path(course) do
+          #"You bought this course. Keep learning" +
+          "<i class='fa fa-spinner'></i>".html_safe + " " +
+          number_to_percentage(course.progress(current_user), precision: 0)
+        end
       elsif course.price > 0
         link_to number_to_currency(course.price), new_course_enrollment_path(course), class: 'btn btn-success'
       else
@@ -21,9 +25,17 @@ module CoursesHelper
     if current_user
       if user_course.any?
         if user_course.pending_review.any?
-          link_to 'Add a review', edit_enrollment_path(user_course.first)
+          link_to edit_enrollment_path(user_course.first) do
+            "<i class='text-warning fa fa-star'></i>".html_safe + " " +
+            "<i class='text-dark fa fa-question'></i>".html_safe + " " +
+            'Add a review'
+          end
         else
-          link_to 'Thanks for reviewing! Your Review', enrollment_path(user_course.first)
+          link_to enrollment_path(user_course.first) do
+            "<i class='text-warning fa fa-star'></i>".html_safe + " " +
+            "<i class='fa fa-check'></i>".html_safe + " " +
+            'Thanks for reviewing! Click To See Your Review'
+          end
         end
       end
     end
