@@ -66,3 +66,5 @@ gem "pundit"
 gem 'exception_notification'
 gem 'pagy'
 gem 'pry-rails'
+gem "chartkick"
+gem 'groupdate'

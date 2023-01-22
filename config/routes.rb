@@ -11,6 +11,15 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :edit, :show, :update]
   get 'home/index'
   get 'activity', to: 'home#activity'
+  get 'analytics', to: 'home#analytics'
+  
+  namespace :charts do
+    get 'users_per_day'
+    get 'enrollments_per_day'
+    get 'course_popularity'
+    get 'money_makers'
+  end
+  
   root "home#index"
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

@@ -35,7 +35,10 @@
                     = Enrollment.count
                 = link_to activity_path, class: "dropdown-item" do
                   .fa.fa-bell
-                  %b Activity   
+                  %b Activity 
+                = link_to analytics_path, class: "dropdown-item" do
+                  .fa.fa-chart-line
+                  Analytics  
         - if current_user 
           - if current_user.has_role?(:student) 
             %li.nav-item.dropdown
