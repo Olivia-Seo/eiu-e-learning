@@ -31,7 +31,7 @@
     %h4
       .fa.fa-tasks
       = pluralize(@course.lessons_count, 'lesson')
-      .float-right
+      .float-end
         .fa.fa-spinner
         = number_to_percentage(@course.progress(current_user), precision: 0)
     %ul.list-group

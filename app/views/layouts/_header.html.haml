@@ -23,6 +23,11 @@
                 .fa.fa-user
                 %b Admin
               %ul.dropdown-menu{"aria-labelledby" => "navbarDropdown"}
+                = link_to unapproved_courses_path, class: "dropdown-item" do
+                  .fa.fa-graduation-cap
+                  Unapproved courses
+                  .badge.bg-info
+                    = Course.unapproved.count
                 = link_to users_path,  class: "dropdown-item" do
                   .fa.fa-users
                   %b Users 

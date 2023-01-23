@@ -68,3 +68,4 @@ gem 'pagy'
 gem 'pry-rails'
 gem "chartkick"
 gem 'groupdate'
+gem 'rails-erd', group: :development
