@@ -70,3 +70,4 @@ gem "chartkick"
 gem 'groupdate'
 gem 'rails-erd', group: :development
 gem 'ranked-model'
+gem "aws-sdk-s3", require: false
