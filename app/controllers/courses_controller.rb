@@ -1,5 +1,6 @@
 class CoursesController < ApplicationController
-  before_action :set_course, only: [:show, :edit, :update, :destroy, :approve, :unapprove]
+  skip_before_action :authenticate_user!, :only => [:show]
+  before_action :set_course, only: [:show, :edit, :update, :destroy, :approve, :unapprove, :analytics]
 
   # GET /courses or /courses.json
   def index
@@ -51,11 +52,15 @@ class CoursesController < ApplicationController
     @course.update_attribute(:approved, false)
     redirect_to @course, notice: "Course upapproved and hidden!"
   end
+  
+  def analytics
+    authorize @course, :owner?
+  end
 
   # GET /courses/1 or /courses/1.json
   def show
     authorize @course
-    @lessons = @course.lessons
+    @lessons = @course.lessons.rank(:row_order)
     @enrollments_with_review = @course.enrollments.reviewed
   end
 

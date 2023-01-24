@@ -1,15 +1,15 @@
 - content_for :title do
   EiuELearning
-  \/
+  |
   Course
   = @course.title
-  \/
+  |
   Lesson
   = @lesson.title
 = link_to 'Courses', courses_path
-\/
+|
 = link_to @lesson.course.title, course_path(@lesson.course)
-\/
+|
 = link_to @lesson.title, course_lesson_path(@course, @lesson)
 %p
 
