@@ -1,5 +1,12 @@
 class LessonsController < ApplicationController
-  before_action :set_lesson, only: %i[ show edit update destroy ]
+  before_action :set_lesson, only: [:show, :edit, :update, :destroy, :delete_video]
+ 
+  def delete_video
+    authorize @lesson, :edit?
+    @lesson.video.purge
+    @lesson.video_thumbnail.purge
+    redirect_to edit_course_lesson_path(@course, @lesson), notice: 'Video successfully deleted!'
+  end
  
   def sort
     @course = Course.friendly.find(params[:course_id])
@@ -82,6 +89,6 @@ class LessonsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def lesson_params
-      params.require(:lesson).permit(:title, :content, :row_order_position)
+      params.require(:lesson).permit(:title, :content, :row_order_position, :video, :video_thumbnail)
     end
 end

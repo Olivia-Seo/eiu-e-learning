@@ -2,6 +2,11 @@
   .card-header
     .fa.fa-graduation-cap
     = link_to course.title, course_path(course)
+  - if course.avatar.attached?
+    .card-img-top
+      = link_to course_path(course) do
+        = image_tag course.avatar, height: "200px", width: "100%"
+        /= image_tag course.avatar.variant(resize_to_limit: [100, 100])
   .card-body
     %small= simple_format(course.short_description)
   .card-footer
@@ -48,11 +53,10 @@
           .badge.bg-success approved
         - else
           .badge.bg-danger unapproved
-    - if policy(course).approve?
-      .card-footer
-        - if course.approved?
-          = link_to 'unapprove', unapprove_course_path(course), method: :patch, class: 'btn btn-sm btn-danger'
-        - else
-          = link_to 'approve', approve_course_path(course), method: :patch, class: 'btn btn-sm btn-success'    
+        - if policy(course).approve?
+          - if course.approved?
+            = link_to 'unapprove', unapprove_course_path(course), method: :patch, class: 'btn btn-sm btn-danger'
+          - else
+            = link_to 'approve', approve_course_path(course), method: :patch, class: 'btn btn-sm btn-success' 
         
     

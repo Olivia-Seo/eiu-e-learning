@@ -10,10 +10,14 @@ Rails.application.routes.draw do
       patch :approve
       patch :unapprove
     end
-    resources :lessons
+    
     resources :lessons do
       put :sort
+      member do
+        delete :delete_video
+      end
     end
+    
     resources :enrollments, only: [:new, :create]
   end
   resources :users, only: [:index, :edit, :show, :update]
