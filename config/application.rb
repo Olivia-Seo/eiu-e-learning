@@ -18,7 +18,9 @@ module EiuELearning
     end
     
     #video previews for action_text
-    config.after_initialize do
+    config.to_prepare do
+      ActionText::ContentHelper.allowed_tags << "iframe"
+
       ActionText::ContentHelper.allowed_attributes.add 'style'
       ActionText::ContentHelper.allowed_attributes.add 'controls'
 
