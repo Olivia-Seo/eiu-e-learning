@@ -1,21 +1,16 @@
 %nav.navbar.navbar-expand-lg.navbar-light{:style => "background-color: #e3f2fd;"}
   .container-fluid
     %a.navbar-brand{:href => "/"}
-      %i.fas.fa-flag
-      EIU E-Learning
+      %img{alt: "EIU logo", height: "30", src: "https://cdn.haitrieu.com/wp-content/uploads/2021/12/Logo-DH-Quoc-Te-Mien-Dong-EIU.png", width: "100"}
     %button.navbar-toggler{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-bs-target" => "#navbarSupportedContent", "data-bs-toggle" => "collapse", :type => "button"}
       %span.navbar-toggler-icon
     #navbarSupportedContent.collapse.navbar-collapse
       %ul.navbar-nav.me-auto
-        = link_to root_path, class: "nav-link #{'active fw-bold' if current_page?(root_path)}" do
-          .fa.fa-home
-          Home
         - if current_user
           %ul.navbar-nav.me-auto
             = link_to courses_path, class: "nav-link #{'active fw-bold' if current_page?(root_path)}" do
               .fa.fa-graduation-cap
               Courses
-        
         - if current_user 
           - if current_user.has_role?(:admin) 
             %li.nav-item.dropdown
@@ -81,18 +76,17 @@
                 = link_to new_course_path,  class: "dropdown-item" do
                   .fa.fa-plus
                   New Course   
-  
-        .form-inline.my-2.my-lg-0
+        
+      %ul.navbar-nav.ms-auto
+        - if current_user
+          .form-inline.my-2.my-lg-0
           = form_tag(courses_path, method: :get) do
             .input-group
               = text_field_tag :title, params[:title], autocomplete: 'off', placeholder: "Find a course", class: 'form-control-sm'
               %span.input-group-append
                 %button.btn.btn-outline-success{:type => "submit"} Search
-
-      %ul.navbar-nav.ms-auto
-        - if current_user
           %li.nav-item.dropdown
-            %a#navbarDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", :href => "#", :role => "button"}
+            %a#navbarDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", :href => "#", :role => "button", :style => "margin-right: 150px"}
               .fa.fa-user
               %b= current_user.username
             %ul.dropdown-menu{"aria-labelledby" => "navbarDropdown"}
@@ -110,7 +104,7 @@
         - else
           %ul.navbar-nav.mr-auto
             %ul.navbar-nav.mr-right
-              %li.nav-item{class: "#{'active font-weight-bold' if current_page?(new_user_registration_path)}"}
-                = link_to 'Sign Up', new_user_registration_path, class: 'nav-link'
+              %li.nav-item{class: "#{'active font-weight-bold' if current_page?(new_user_registration_path)}", style: "margin-right: 10px"}
+                = link_to 'Sign Up', new_user_registration_path, class: 'btn btn-outline-info'
               %li.nav-item{class: "#{'active font-weight-bold' if current_page?(new_user_session_path)}"}
-                = link_to 'Log In', new_user_session_path, class: 'nav-link'
+                = link_to 'Log In', new_user_session_path, class: 'btn btn-outline-info'

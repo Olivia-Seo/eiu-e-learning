@@ -1,0 +1,64 @@
+<section class="vh-100 bg-image"
+  style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCIh_gzPiUltekM-MR3aHHPkFPhX942noOCyaw30aGXtxKc9r-7adl3Krn36mGLN1g9a0&usqp=CAU');">
+  <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+          <div class="card" style="border-radius: 15px;">
+            <div class="card-body p-5">
+              <h2 class="text-uppercase text-center mb-5">Create an account</h2>
+              <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+                <%= f.error_notification %>
+                <div class="form-inputs">
+
+                  <form>
+    
+                    <div class="form-inputs form-outline mb-4">
+                      <%= f.input :email,
+                                  required: true,
+                                  autofocus: true,
+                                  input_html: { autocomplete: "email" },
+                                  :class =>"form-control form-control-lg" %>
+                    </div>
+    
+                    <div class="form-outline mb-4">
+                      <%= f.input :password,
+                                  required: true,
+                                  hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
+                                  input_html: { autocomplete: "new-password" },
+                                  :class => "form-control form-control-lg"%>
+                    </div>
+    
+                    <div class="form-outline mb-4">
+                       <%= f.input :password_confirmation,
+                                    required: true,
+                                    input_html: { autocomplete: "new-password" },
+                                    :class => "form-control form-control-lg"%>
+                    </div>
+                    
+                     
+    
+                    <div class="form-check d-flex justify-content-center mb-5">
+                      
+                      <%= recaptcha_tags %> 
+                     
+                    </div>
+    
+                    <div class="form-actions d-flex justify-content-center">
+                      <div class="form-actions">
+                        <%= f.button :submit,"Register" , :class => "btn btn-success btn-block btn-lg gradient-custom-4 text-white"%>
+                      </div>
+                    </div>
+    
+                    <p class="text-center text-muted mt-5 mb-0">Have already an account?
+                    <%= render "devise/shared/links" %></p>
+                  </form>
+                </div>
+              <% end %>  
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

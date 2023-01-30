@@ -6,7 +6,7 @@ class UsersController < ApplicationController
       #@users = User.all.order(created_at: :desc )
       @q = User.ransack(params[:q])
       #@users = @q.result(distinct: true)
-      @pagy, @users = pagy(@q.result(distinct: true))
+      @pagy, @users = pagy(@q.result(distinct: true).order(created_at: :desc))
       authorize @users
   end
   
