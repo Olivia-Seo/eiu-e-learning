@@ -4,6 +4,11 @@ class CoursesController < ApplicationController
 
   # GET /courses or /courses.json
   def index
+    @latest_good_reviews = Enrollment.reviewed.latest_good_reviews
+    @latest = Course.latest.published.approved
+    @top_rated = Course.top_rated.published.approved
+    @popular = Course.popular.published.approved
+    @purchased_courses = Course.joins(:enrollments).where(enrollments: {user: current_user}).order(created_at: :desc).limit(3)
     
     @ransack_path = courses_path
     @ransack_courses = Course.published.approved.ransack(params[:courses_search], search_key: :courses_search)
@@ -14,6 +19,12 @@ class CoursesController < ApplicationController
   end
   
   def purchased
+    @latest_good_reviews = Enrollment.reviewed.latest_good_reviews
+    @latest = Course.latest.published.approved
+    @top_rated = Course.top_rated.published.approved
+    @popular = Course.popular.published.approved
+    @purchased_courses = Course.joins(:enrollments).where(enrollments: {user: current_user}).order(created_at: :desc).limit(3)
+    
     @ransack_path = purchased_courses_path
     @ransack_courses = Course.joins(:enrollments).where(enrollments: {user: current_user}).ransack(params[:courses_search], search_key: :courses_search)
     @pagy, @courses = pagy(@ransack_courses.result.includes(:user))
@@ -21,6 +32,12 @@ class CoursesController < ApplicationController
   end
 
   def pending_review
+    @latest_good_reviews = Enrollment.reviewed.latest_good_reviews
+    @latest = Course.latest.published.approved
+    @top_rated = Course.top_rated.published.approved
+    @popular = Course.popular.published.approved
+    @purchased_courses = Course.joins(:enrollments).where(enrollments: {user: current_user}).order(created_at: :desc).limit(3)
+    
     @ransack_path = pending_review_courses_path
     @ransack_courses = Course.joins(:enrollments).merge(Enrollment.pending_review.where(user: current_user)).ransack(params[:courses_search], search_key: :courses_search)
     @pagy, @courses = pagy(@ransack_courses.result.includes(:user))
@@ -28,6 +45,12 @@ class CoursesController < ApplicationController
   end
 
   def created
+    @latest_good_reviews = Enrollment.reviewed.latest_good_reviews
+    @latest = Course.latest.published.approved
+    @top_rated = Course.top_rated.published.approved
+    @popular = Course.popular.published.approved
+    @purchased_courses = Course.joins(:enrollments).where(enrollments: {user: current_user}).order(created_at: :desc).limit(3)
+    
     @ransack_path = created_courses_path
     @ransack_courses = Course.where(user: current_user).ransack(params[:courses_search], search_key: :courses_search)
     @pagy, @courses = pagy(@ransack_courses.result.includes(:user))
@@ -35,6 +58,12 @@ class CoursesController < ApplicationController
   end
   
   def unapproved
+    @latest_good_reviews = Enrollment.reviewed.latest_good_reviews
+    @latest = Course.latest.published.approved
+    @top_rated = Course.top_rated.published.approved
+    @popular = Course.popular.published.approved
+    @purchased_courses = Course.joins(:enrollments).where(enrollments: {user: current_user}).order(created_at: :desc).limit(3)
+    
     @ransack_path = unapproved_courses_path
     @ransack_courses = Course.unapproved.ransack(params[:courses_search], search_key: :courses_search)
     @pagy, @courses = pagy(@ransack_courses.result.includes(:user))
@@ -48,6 +77,7 @@ class CoursesController < ApplicationController
   end
 
   def unapprove
+    
     authorize @course, :approve?
     @course.update_attribute(:approved, false)
     redirect_to @course, notice: "Course upapproved and hidden!"

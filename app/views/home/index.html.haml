@@ -5,17 +5,24 @@
   
 .jumbotron
   .display-4
-    What do you want to learn today?
-.py-5
-  .container.px-lg-5
-    .p-4.p-lg-5.bg-light.rounded-3.text-center
-      .m-4.m-lg-5
-        %h1.display-5.fw-bold A warm welcome!
-        %p.fs-4
-        | Bootstrap utility classes are used to create this jumbotron since the old component has been removed from the framework. Why create custom CSS when you can use utilities?
-        %a.btn.btn-primary.btn-lg(href='#!') Call to action
+    %br
+%section.vh-70.bg-image{style: "background-image: url('https://eiu.edu.vn/wp-content/uploads/2021/09/apply-2.jpg');"}
+  .py-5
+    .container.px-lg-5
+      .p-4.p-lg-5.bg-light.rounded-3.text-center
+        .m-4.m-lg-5
+          %h1.display-5.fw-bold Learn without limits
+          %p.fs-4
+          | Start, switch, or advance your career with more than 5,400 courses, Professional Certificates, and degrees from world-class universities and companies.
+          %br 
+          -if current_user
+            
+          - else    
+            .nav-item{class: "#{'active font-weight-bold' if current_page?(new_user_registration_path)}", style: "margin-right: 10px"}
+              = link_to 'Join for free', new_user_registration_path, class: 'btn btn-lg btn-info'
   .p-4
-
+// basic info
+%br
 .card-group
   .card.card-body
     %h1
@@ -48,51 +55,94 @@
     Learn on your schedule
 
 %p
+//new about school
+%h1
+  .text-center
+    EIU News
+%p
+.row.row-cols-1.row-cols-md-3.g-4
+  .col
+    .card.h-100
+      %img.card-img-top{alt: "...", src: "https://eiu.edu.vn/wp-content/uploads/2021/06/A4A9933-2048x1366.jpg"}/
+      .card-body
+        %h5.card-title 
+          %a.nav-link{href: "https://eiu.edu.vn/tuyen-sinh/tuyen-sinh-2023/hoc-phi-hoc-bong/"} Scholarships And Tuition Fees
+        %p.card-text This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
 
-- if current_user
-  %h2
-    .fa.fa-user-graduate
-    Continue Learning
-  .card-columns
-    - @purchased_courses.each do |course|
-      = render 'courses/course', course: course    
-  .text-right
-    = link_to 'All my purchased courses', purchased_courses_path    
-  %hr
-  
-%h2
-  .fa.fa-chart-line
-  Popular courses
-.card-group
-  - @popular.each do |course|
-    = render 'courses/course', course: course
-.text-right
-  = link_to 'More popular courses', courses_path(courses_search: {s: 'enrollments_count desc'})    
+  .col
+    .card.h-100
+      %img.card-img-top{alt: "...", src: "https://eiu.edu.vn/wp-content/uploads/2020/08/LIB-Journals.jpg"}/
+      .card-body
+        %h5.card-title
+          %a.nav-link{href: "https://eiu.edu.vn/kham-pha/doi-ngu-eiu/"} EIU Team
+        %p.card-text This card has supporting text below as a natural lead-in to additional content.
 
-%hr
-%h2 
-  .fa.fa-star
-  Top rated courses
-.card-group
-  - @top_rated.each do |course|
-    = render 'courses/course', course: course
-.text-right
-  = link_to 'Best rated courses', courses_path(courses_search: {s: 'average_rating desc'})    
+  .col
+    .card.h-100
+      %img.card-img-top{alt: "...", src: "https://eiu.edu.vn/wp-content/uploads/2021/06/TUA3067-2048x1366.jpg"}/
+      .card-body
+        %h5.card-title
+          %a.nav-link{href: "https://eiu.edu.vn/tuyen-sinh/tai-sao-lua-chon-eiu/"} Education Programs
+        %p.card-text This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.
 
-%hr
-%h2 
-  .fa.fa-clock
-  Latest courses
-.card-group
-  - @latest.each do |course|
-    = render 'courses/course', course: course
-.text-right
-  = link_to 'More new courses', courses_path(courses_search: {s: 'created_at desc'})    
+%br
 
 %hr
-%h2 
-  .fa.fa-comment
-  What our students have to say
-.card-columns
-  - @latest_good_reviews.each do |enrollment|
-    = render 'enrollments/enrollment', enrollment: enrollment
+
+// video intro
+%h1
+  .text-center
+    EIU Studying Environment
+%p
+.card{style: "max-width: 2000px"}
+  .row.g-0
+    .col-md-5{style: "position: center; left: 0; right: 0; margin: 0 auto;"} 
+      %h5 EIU Studying Environment
+      %video.img-fluid{autoplay: "", loop: "", muted: ""}
+        %source{src: "https://mdbcdn.b-cdn.net/img/video/forest.mp4", type: "video/mp4"}
+        
+    .col-md-3{style: "padding-top: 0px"}
+      .card{style: "position: center; left: 0; right: 0; margin: 0 auto; max-width: 360px;"}
+        %a{href: "https://eiu.edu.vn/kham-pha/tin-tuc-su-kien/tin-tuc/"}
+          %img.card-img-top{alt: "...", src: "https://eiu.edu.vn/wp-content/uploads/2022/03/website-thumbnail-VI-02-265x355.png"}/
+
+    .col-md-3{style: "padding-top: 0px"}
+      .card{style: "position: center; left: 0; right: 0; margin: 0 auto; max-width: 360px;"}
+        %a{href: "http://becamex.com.vn/"}
+          %img.card-img-top{alt: "...", src: "https://eiu.edu.vn/wp-content/uploads/2022/03/website-thumbnail-VI-01-265x355.png"}/
+// student comments
+
+%p
+%h1
+  .text-center
+    What our students say...
+%p
+
+
+%section.hero-section
+  .card-grid
+    %a.card{href: "#"}
+      .card__background{style: "background-image: url(https://codelearn.io/Themes/TheCodeCampPro/Resources/Images/landing-v2/testimonial/dangquang.jpg)"}
+      .card__content
+        %p.card__category Popular Courses
+        %h3.card__heading Example Card Heading
+          
+    %a.card{href: "#"}
+      .card__background{style: "background-image: url(https://images.unsplash.com/photo-1557187666-4fd70cf76254?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60)"}
+      .card__content
+        %p.card__category Top rated courses
+        %h3.card__heading Example Card Heading
+    %a.card{href: "#"}
+      .card__background{style: "background-image: url(https://images.unsplash.com/photo-1556680262-9990363a3e6d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60)"}
+      .card__content
+        %p.card__category Latest courses
+        %h3.card__heading Example Card Heading
+    %a.card{href: "#"}
+      .card__background{style: "background-image: url(https://images.unsplash.com/photo-1557004396-66e4174d7bf6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60)"}
+      .card__content
+        %p.card__category Category
+        %h3.card__heading Example Card Heading
+    %div
+
+
+    

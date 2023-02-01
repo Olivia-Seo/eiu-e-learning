@@ -59,4 +59,22 @@
           - else
             = link_to 'approve', approve_course_path(course), method: :patch, class: 'btn btn-sm btn-success' 
         
-    
+
+%section.card-section
+  .card.text-white.card-has-bg.click-col{style: "background-image:url('https://source.unsplash.com/600x900/?tech,street');"}
+    %img.card-img.d-none{alt: "Goverment Lorem Ipsum Sit Amet Consectetur dipisi?", src: "https://source.unsplash.com/600x900/?tech,street"}/
+    .card-img-overlay.d-flex.flex-column
+      .card-body
+        %small.card-meta.mb-2
+          = link_to course.title, course_path(course)
+        %h4.card-title.mt-0
+          %a.text-white{herf: "#"} Goverment Lorem Ipsum Sit Amet Consectetur dipisi?
+        %small
+          %i.far.fa-clock
+          October 15, 2020
+      .card-footer
+        .media
+          %img.mr-3.rounded-circle{alt: "Generic placeholder image", src: "https://assets.codepen.io/460692/internal/avatars/users/default.png", style: "max-width:50px"}/
+          .media-body
+            %h6.my-0.text-white.d-block Oz Coruhlu
+            %small Director of UI/UX

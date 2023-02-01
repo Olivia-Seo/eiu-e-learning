@@ -3,19 +3,61 @@
   \| 
   = action_name.humanize
   courses
+  
 
-%h3
-  .text-center
-    .fa.fa-graduation-cap
-    = action_name.humanize
-    courses
-    .badge.bg-info
-      = @courses.count
-%p
+- if current_user
+  %h2
+    .fa.fa-user-graduate
+    Continue Learning
+  .card-columns
+    - @purchased_courses.each do |course|
+      = render 'courses/course', course: course    
+  .text-right
+    = link_to 'All my purchased courses', purchased_courses_path    
+  %hr
+  
+%h2
+  .fa.fa-chart-line
+  Popular courses
+.card-group
+  - @popular.each do |course|
+    = render 'courses/course', course: course
+.text-right
+  = link_to 'More popular courses', courses_path(courses_search: {s: 'enrollments_count desc'})    
+
+%hr
+%h2 
+  .fa.fa-star
+  Top rated courses
+.card-group
+  - @top_rated.each do |course|
+    = render 'courses/course', course: course
+.text-right
+  = link_to 'Best rated courses', courses_path(courses_search: {s: 'average_rating desc'})    
+
+%hr
+%h2 
+  .fa.fa-clock
+  Latest courses
+.card-group
+  - @latest.each do |course|
+    = render 'courses/course', course: course
+.text-right
+  = link_to 'More new courses', courses_path(courses_search: {s: 'created_at desc'})    
+
+%hr
 
 
 .row
   .col-md-2
+    %h3
+    .text-center
+      .fa.fa-graduation-cap
+      = action_name.humanize
+      courses
+      .badge.bg-info
+        = @courses.count
+      
     /= search_form_for @q do |f|
     = search_form_for @ransack_courses, as: :courses_search, url: @ransack_path do |f|
       = f.label :title
@@ -45,11 +87,10 @@
       = f.submit
     = link_to 'refresh', @ransack_path
 
-
-  .col-md-10
-    .card-columns
+  %section.wrapper
+    .container
       - @courses.each do |course|
         = render 'courses/course', course: course
     != pagy_bootstrap_nav(@pagy)    
-
+    
 %br
