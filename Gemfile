@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.7.2'
+#ruby '2.7.7'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.1.0'
@@ -57,7 +57,8 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem "haml-rails", "~> 2.0"
 gem 'simple_form'
 gem 'faker'
-gem 'devise'
+gem 'devise', github: "heartcombo/devise", branch: "master"
+
 gem 'friendly_id', '~> 5.2.4'
 gem 'ransack'
 gem 'public_activity'
@@ -75,3 +76,5 @@ gem 'active_storage_validations'
 gem 'image_processing'
 gem 'recaptcha'
 gem "letter_opener", group: :development
+gem 'omniauth-google-oauth2'
+gem "omniauth-rails_csrf_protection"

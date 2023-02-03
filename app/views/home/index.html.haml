@@ -55,6 +55,19 @@
     Learn on your schedule
 
 %p
+
+//keeo studying 
+- if current_user
+  %h2
+    .fa.fa-user-graduate
+    Continue Learning
+  .card-columns
+    - @purchased_courses.each do |course|
+      = render 'courses/course', course: course    
+  .text-right
+    = link_to 'All my purchased courses', purchased_courses_path    
+  %hr
+
 //new about school
 %h1
   .text-center
