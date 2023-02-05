@@ -20,7 +20,7 @@
               %ul.dropdown-menu{"aria-labelledby" => "navbarDropdown"}
                 = link_to unapproved_courses_path, class: "dropdown-item" do
                   .fa.fa-graduation-cap
-                  Unapproved courses
+                  %b Unapproved courses
                   .badge.bg-info
                     = Course.unapproved.count
                 = link_to users_path,  class: "dropdown-item" do
@@ -38,7 +38,10 @@
                   %b Activity 
                 = link_to analytics_path, class: "dropdown-item" do
                   .fa.fa-chart-line
-                  Analytics  
+                  %b Analytics  
+                = link_to tags_path, class: "dropdown-item" do
+                  .fa.fa-tags
+                  %b Tags  
         - if current_user 
           - if current_user.has_role?(:student) 
             %li.nav-item.dropdown
@@ -87,7 +90,10 @@
                 %button.btn.btn-outline-success{:type => "submit"} Search
           %li.nav-item.dropdown
             %a#navbarDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", :href => "#", :role => "button", :style => "margin-right: 150px"}
-              .fa.fa-user
+              - if current_user.image?
+                = image_tag current_user.image, size: '30x30', alt: "#{current_user.email}", class: 'rounded-circle'
+              - else
+                .fa.fa-user
               %b= current_user.username
             %ul.dropdown-menu{"aria-labelledby" => "navbarDropdown"}
               = link_to user_path(current_user), class: "dropdown-item #{'active fw-bold' if current_page?(edit_user_registration_path)}" do
@@ -106,9 +112,9 @@
             %ul.navbar-nav.mr-right
               %li.nav-item{class: "#{'active font-weight-bold' if current_page?(new_user_registration_path)}", style: "margin-right: 10px"}
                 = link_to 'Sign Up', new_user_registration_path, class: 'btn btn-outline-info'
-              %li.nav-item{class: "#{'active font-weight-bold' if current_page?(new_user_session_path)}"}
-                = link_to 'Log In', new_user_session_path, class: 'btn btn-outline-info'
+              %li.nav-item{class: "#{'active font-weight-bold' if current_page?(new_user_session_path)}", style: "margin-right: 10px"}
+                = link_to 'Log In', new_user_session_path,  class: 'btn btn-outline-info'
               %li.nav-item{class: "#{'active font-weight-bold' if current_page?(user_google_oauth2_omniauth_authorize_path)}"}
-                = link_to 'Sign in with Google', user_google_oauth2_omniauth_authorize_path, class: 'btn btn-outline-info'  
+                = link_to 'Sign in with Google', user_google_oauth2_omniauth_authorize_path, method: :post, class: 'btn btn-outline-info'  
                 
                 

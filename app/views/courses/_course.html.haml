@@ -5,7 +5,7 @@
   - if course.avatar.attached?
     .card-img-top
       = link_to course_path(course) do
-        = image_tag course.avatar, height: "200px", width: "100%"
+        /= image_tag course.avatar, height: "200px", width: "100%"
         /= image_tag course.avatar.variant(resize_to_limit: [100, 100])
   .card-body
     %small= simple_format(course.short_description)
@@ -58,7 +58,11 @@
             = link_to 'unapprove', unapprove_course_path(course), method: :patch, class: 'btn btn-sm btn-danger'
           - else
             = link_to 'approve', approve_course_path(course), method: :patch, class: 'btn btn-sm btn-success' 
-        
+  - if course.tags.any?
+    .card-footer
+      - course.tags.each do |tag|
+        .badge.bg-info
+          = tag.name        
 
 %section.card-section
   .card.text-white.card-has-bg.click-col{style: "background-image:url('https://source.unsplash.com/600x900/?tech,street');"}

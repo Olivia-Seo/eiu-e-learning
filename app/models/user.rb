@@ -11,11 +11,9 @@ class User < ApplicationRecord
   has_many :user_lessons, dependent: :nullify
   has_many :comments, dependent: :nullify
    
-  def self.from_omniauth(access_token)
+   def self.from_omniauth(access_token)
       data = access_token.info
       user = User.where(email: data['email']).first
-
-      # Uncomment the section below if you want users to be created if they don't exist
       unless user
          user = User.create(
             email: data['email'],
@@ -24,7 +22,7 @@ class User < ApplicationRecord
          )
       end
       user
-  end 
+  end
    
   def to_s
     email

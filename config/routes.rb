@@ -6,8 +6,12 @@ Rails.application.routes.draw do
   
   resources :enrollments do
     get :my_students, on: :collection
+    member do
+      get :certificate
+    end
   end
   
+  resources :tags, only: [:create, :index, :destroy]
   resources :courses do
     get :purchased, :pending_review, :created, :unapproved, on: :collection
     member do

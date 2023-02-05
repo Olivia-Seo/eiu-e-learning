@@ -27,6 +27,7 @@ import "../trix-editor-overrides"
 
 require("jquery") // yarn add jquery
 require("jquery-ui-dist/jquery-ui"); // yarn add jquery-ui-dist 
+require("selectize")
 
 import videojs from 'video.js'
 import 'video.js/dist/video-js.css'
@@ -52,6 +53,22 @@ $(document).on('turbolinks:load', function(){
     },
     stop: function(e, ui){
       console.log("stop called when finishing sort of cards");
+    }
+  });
+  
+  if ($('.selectize')){
+      $('.selectize').selectize({
+          sortField: 'text'
+      });
+  }
+  
+  $(".selectize-tags").selectize({
+    create: function(input, callback) {
+      $.post('/tags.json', { tag: { name: input } })
+        .done(function(response){
+          console.log(response)
+          callback({value: response.id, text: response.name });
+        })
     }
   });
   

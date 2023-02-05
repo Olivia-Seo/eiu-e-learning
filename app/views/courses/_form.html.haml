@@ -34,6 +34,8 @@
     = f.input :level, collection: Course.levels, include_blank: true
     = f.input :price
     = f.input :published
+    = f.label :tags
+    = f.select :tag_ids, @tags.all.pluck(:name, :id), {}, { multiple: true, class: "selectize-tags" }
 
 
   .form-actions

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_01_27_062845) do
+ActiveRecord::Schema.define(version: 2023_02_05_041258) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -82,6 +82,15 @@ ActiveRecord::Schema.define(version: 2023_01_27_062845) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
+  create_table "course_tags", force: :cascade do |t|
+    t.bigint "course_id", null: false
+    t.bigint "tag_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["course_id"], name: "index_course_tags_on_course_id"
+    t.index ["tag_id"], name: "index_course_tags_on_tag_id"
+  end
+
   create_table "courses", force: :cascade do |t|
     t.string "title"
     t.text "description"
@@ -151,6 +160,13 @@ ActiveRecord::Schema.define(version: 2023_01_27_062845) do
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource"
   end
 
+  create_table "tags", force: :cascade do |t|
+    t.string "name"
+    t.integer "course_tags_count", default: 0, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "user_lessons", force: :cascade do |t|
     t.bigint "lesson_id", null: false
     t.bigint "user_id", null: false
@@ -183,6 +199,14 @@ ActiveRecord::Schema.define(version: 2023_01_27_062845) do
     t.integer "enrollments_count", default: 0, null: false
     t.integer "comments_count", default: 0, null: false
     t.integer "user_lessons_count", default: 0, null: false
+    t.string "provider"
+    t.string "uid"
+    t.string "token"
+    t.integer "expires_at"
+    t.boolean "expires"
+    t.string "efresh_token"
+    t.string "image"
+    t.string "name"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
@@ -201,6 +225,8 @@ ActiveRecord::Schema.define(version: 2023_01_27_062845) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "comments", "lessons"
   add_foreign_key "comments", "users"
+  add_foreign_key "course_tags", "courses"
+  add_foreign_key "course_tags", "tags"
   add_foreign_key "courses", "users"
   add_foreign_key "enrollments", "courses"
   add_foreign_key "enrollments", "users"

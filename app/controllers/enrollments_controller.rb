@@ -1,5 +1,6 @@
 class EnrollmentsController < ApplicationController
-  before_action :set_enrollment, only: %i[ show edit update destroy ]
+  skip_before_action :authenticate_user!, :only => [:certificate]
+  before_action :set_enrollment, only: [:show, :edit, :update, :destroy, :certificate]
   before_action :set_coruse, only: [:new, :create]
 
   # GET /enrollments or /enrollments.json
@@ -72,6 +73,17 @@ class EnrollmentsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to enrollments_url, notice: "Enrollment was successfully destroyed." }
       format.json { head :no_content }
+    end
+  end
+  
+  def certificate
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "#{@enrollment.course.title}, #{@enrollment.user.email}",
+        page_size: 'A4',
+        template: "enrollments/show.pdf.haml"
+      end
     end
   end
 
