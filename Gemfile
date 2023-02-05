@@ -79,4 +79,6 @@ gem "letter_opener", group: :development
 gem 'omniauth-google-oauth2' #sign in with google
 gem "omniauth-rails_csrf_protection"
 gem 'wicked_pdf'
-gem 'wkhtmltopdf-binary'
+gem 'wkhtmltopdf-binary', group: :development
+gem 'wkhtmltopdf-heroku', group: :production
+
