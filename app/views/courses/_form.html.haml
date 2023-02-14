@@ -20,8 +20,9 @@
     .row
     /= f.file_field :avatar 
     /%small= f.error :avatar, class: 'text-danger'
+    %br
     = f.input :avatar
-
+    %br
     .row
     /= f.label :description
     /= f.rich_text_area :description

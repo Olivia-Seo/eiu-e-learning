@@ -1,90 +1,105 @@
 // Place all the styles related to the Courses controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
-.card-section .body{
-background: #23EC55;
-background: -webkit-radial-gradient(top right, #23EC55, #2D51C1);
-background: -moz-radial-gradient(top right, #23EC55, #2D51C1);
-background: radial-gradient(to bottom left, #23EC55, #2D51C1);
+
+//////////////////
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,100,900);
+
+html .card-section,
+body .card-section{
+  -moz-box-sizing: border-box;
+       box-sizing: border-box;
+  height: 100%;
+  width: 100%; 
+  background: #FFF;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
 }
-.wrapper{margin:10vh}
-//post card styles
-
-.card-section .card{
-  border: none;
-  transition: all 500ms cubic-bezier(0.19, 1, 0.22, 1);
- overflow:hidden;
- border-radius:20px;
- min-height:450px;
-   box-shadow: 0 0 12px 0 rgba(0,0,0,0.2);
-
- @media (max-width: 768px) {
-  min-height:350px;
-}
-
-@media (max-width: 420px) {
-  min-height:300px;
+ 
+.card-section {
+  display: table;
+  height: 100%;
+  width: 100%;
 }
 
- &.card-has-bg{
- transition: all 500ms cubic-bezier(0.19, 1, 0.22, 1);
-  background-size:120%;
-  background-repeat:no-repeat;
-  background-position: center center;
-  &:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background: inherit;
-    -webkit-filter: grayscale(1);
-  -moz-filter: grayscale(100%);
-  -ms-filter: grayscale(100%);
-  -o-filter: grayscale(100%);
-  filter: grayscale(100%);}
-
-  &:hover {
-    transform: scale(0.98);
-     box-shadow: 0 0 5px -2px rgba(0,0,0,0.3);
-    background-size:130%;
-     transition: all 500ms cubic-bezier(0.19, 1, 0.22, 1);
-
-    .card-img-overlay {
-      transition: all 800ms cubic-bezier(0.19, 1, 0.22, 1);
-      background: rgb(35,79,109);
-     background: linear-gradient(0deg, rgba(4,69,114,0.5) 0%, rgba(4,69,114,1) 100%);
-     }
+.card-section .container-fostrap {
+  display: table-cell;
+  padding: 1em;
+  text-align: center;
+  vertical-align: middle;
+}
+.card-section .fostrap-logo {
+  width: 100px;
+  margin-bottom:15px
+}
+.card-section h1.heading {
+  color: #fff;
+  font-size: 1.15em;
+  font-weight: 900;
+  margin: 0 0 0.5em;
+  color: #505050;
+}
+@media (min-width: 450px) {
+  .card-section h1.heading {
+    font-size: 3.55em;
   }
 }
- .card-footer{
-  background: none;
-   border-top: none;
-    .media{
-     img{
-       border:solid 3px rgba(255,255,255,0.3);
-     }
-   }
- }
- .card-meta{color:#26BD75}
- .card-body{ 
-   transition: all 500ms cubic-bezier(0.19, 1, 0.22, 1);
+@media (min-width: 760px) {
+  .card-section h1.heading {
+    font-size: 3.05em;
+  }
 }
- &:hover {
-   .card-body{
-     margin-top:30px;
-     transition: all 800ms cubic-bezier(0.19, 1, 0.22, 1);
-   }
- cursor: pointer;
- transition: all 800ms cubic-bezier(0.19, 1, 0.22, 1);
+@media (min-width: 900px) {
+  .card-section h1.heading {
+    font-size: 3.25em;
+    margin: 0 0 0.3em;
+  }
+} 
+.card-section .card {
+  display: block; 
+    margin-bottom: 20px;
+    line-height: 1.42857143;
+    background-color: #fff;
+    border-radius: 2px;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12); 
+    transition: box-shadow .25s; 
 }
- .card-img-overlay {
-  transition: all 800ms cubic-bezier(0.19, 1, 0.22, 1);
- background: rgb(35,79,109);
-background: linear-gradient(0deg, rgba(35,79,109,0.3785889355742297) 0%, rgba(69,95,113,1) 100%);
+.card:hover {
+  box-shadow: 0 8px 17px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
 }
+.img-card .card-section  {
+  width: 100%;
+  height:200px;
+  border-top-left-radius:2px;
+  border-top-right-radius:2px;
+  display:block;
+    overflow: hidden;
 }
-@media (max-width: 767px){
-  
+.img-card img{
+  width: 100%;
+  height: 200px;
+  object-fit:cover; 
+  transition: all .25s ease;
+} 
+.card-content {
+  padding:15px;
+  text-align:left;
+}
+.card-title {
+  margin-top:0px;
+  font-weight: 700;
+  font-size: 1.65em;
+}
+.card-title a {
+  color: #000;
+  text-decoration: none !important;
+}
+.card-read-more {
+  border-top: 1px solid #D4D4D4;
+}
+.card-read-more a {
+  text-decoration: none !important;
+  padding:10px;
+  font-weight:600;
+  text-transform: uppercase
 }

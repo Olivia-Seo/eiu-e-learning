@@ -81,4 +81,5 @@ gem "omniauth-rails_csrf_protection"
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary', group: :development
 gem 'wkhtmltopdf-heroku', group: :production
+gem 'devise_invitable', '~> 2.0.0'
 

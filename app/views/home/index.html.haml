@@ -3,169 +3,176 @@
   \| 
   Online Courses - Learn Anything, On Your Schedule
   
-.jumbotron
-  .display-4
-    %br
-%section.vh-70.bg-image{style: "background-image: url('https://eiu.edu.vn/wp-content/uploads/2021/09/apply-2.jpg');"}
-  .py-5
-    .container.px-lg-5
-      .p-4.p-lg-5.bg-light.rounded-3.text-center
-        .m-4.m-lg-5
-          %h1.display-5.fw-bold Learn without limits
-          %p.fs-4
-          | Start, switch, or advance your career with more than 5,400 courses, Professional Certificates, and degrees from world-class universities and companies.
-          %br 
-          -if current_user
-            
-          - else    
-            .nav-item{class: "#{'active font-weight-bold' if current_page?(new_user_registration_path)}", style: "margin-right: 10px"}
-              = link_to 'Join for free', new_user_registration_path, class: 'btn btn-lg btn-info'
-  .p-4
-// basic info
-%br
-.card-group
-  .card.card-body
-    %h1
-      .fa.fa-graduation-cap
-    = pluralize(Course.approved.published.count, 'online courses')  
-    /= Course.count
-    /online courses
-    .row
-    Explore a variety of fresh topics
-  .card.card-body
-    %h1
-      .fa.fa-chalkboard-teacher
-      /.fa.fa-brain
-    = Course.distinct.count(:user_id)
-    expert instructors
-    .row
-    Find the right instructor for you
-  .card.card-body
-    %h1
-      .fa.fa-user-graduate
-    = User.count
-    active learners
-    .row
-    Join the knowledge sharing community
-  .card.card-body
-    %h1
-      .fa.fa-infinity
-    Lifetime access
-    .row
-    Learn on your schedule
+.container  
+  .jumbotron
+    .display-4
+      %br
+  %section.vh-70.bg-image{style: "background-image: url('https://eiu.edu.vn/wp-content/uploads/2021/09/apply-2.jpg');"}
+    .py-5
+      .container.px-lg-5
+        .p-4.p-lg-5.bg-light.rounded-3.text-center
+          .m-4.m-lg-5
+            %h1.display-5.fw-bold Learn without limits
+            %p.fs-4
+            | Start, switch, or advance your career with more than 5,400 courses, Professional Certificates, and degrees from world-class universities and companies.
+            %br 
+            -if current_user
+              
+            - else    
+              .nav-item{class: "#{'active font-weight-bold' if current_page?(new_user_registration_path)}", style: "margin-right: 10px"}
+                = link_to 'Join for free', new_user_registration_path, class: 'btn btn-lg btn-info'
+    .p-4
+  // basic info
+  %br
+  .card-group
+    .card.card-body
+      %h1
+        .fa.fa-graduation-cap
+      = pluralize(Course.approved.published.count, 'online courses')  
+      /= Course.count
+      /online courses
+      .row
+      Explore a variety of fresh topics
+    .card.card-body
+      %h1
+        .fa.fa-chalkboard-teacher
+        /.fa.fa-brain
+      = Course.distinct.count(:user_id)
+      expert instructors
+      .row
+      Find the right instructor for you
+    .card.card-body
+      %h1
+        .fa.fa-user-graduate
+      = User.count
+      active learners
+      .row
+      Join the knowledge sharing community
+    .card.card-body
+      %h1
+        .fa.fa-infinity
+      Lifetime access
+      .row
+      Learn on your schedule
+  
+  %p
 
-%p
+  //keeo studying 
+  - if current_user
+    .row
+      .col-md-8.col-md-8
+        .card.bg-light.text-dark{:style => "text-align:center;margin-top:20px;"}
+          %img.card-img{alt: "Stony Beach", src: "https://thumbs.dreamstime.com/b/welcome-letters-banner-overlapping-colorful-squares-background-121137709.jpg"}/
+      .col-md-4.col-md-4
+        .card
+          %img.img-fluid{src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJS1z2sOXYMEg_OdDCQIJGNMAYejO1p_RkrQ&usqp=CAU"}/
+          %a{href: "#!"}
+            .mask{style: "background-color: rgba(251, 251, 251, 0.15);"}
+          .card-body
+            %ul.navbar-nav.mr-auto{style: "text-align: center"}
+              %h5.card-title Continue Learning
+              %h7.card-text
+                %a.nav-link{href: "/courses/purchased "} ALL MY PURCHASED COURSES
+              %h7.card-text 
+                %a.nav-link{href: "/courses/pending_review"} ALL MY PENDING REVIEWS
 
-%hr
-%h2 
-  .fa.fa-tags
-  Most popular tags
-- @popular_tags.each do |tag|
-  = link_to courses_path(courses_search: {course_tags_tag_id_eq: tag.id}) do
-    .badge.badge-info
-      = tag.name
-      %span.badge.badge-light
-        = tag.course_tags_count
-//keeo studying 
-- if current_user
-  %h2
-    .fa.fa-user-graduate
-    Continue Learning
-  .card-columns
-    - @purchased_courses.each do |course|
-      = render 'courses/course', course: course    
-  .text-right
-    = link_to 'All my purchased courses', purchased_courses_path    
+    
+    %hr
+  
+  //new about school
+  %h1
+    .text-center
+      EIU News
+  %p
+  .row.row-cols-1.row-cols-md-3.g-4
+    .col
+      .card.h-100
+        %img.card-img-top{alt: "...", src: "https://eiu.edu.vn/wp-content/uploads/2021/06/A4A9933-2048x1366.jpg"}/
+        .card-body
+          %h5.card-title 
+            %a.nav-link{href: "https://eiu.edu.vn/tuyen-sinh/tuyen-sinh-2023/hoc-phi-hoc-bong/"} Scholarships And Tuition Fees
+          %p.card-text This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
+  
+    .col
+      .card.h-100
+        %img.card-img-top{alt: "...", src: "https://eiu.edu.vn/wp-content/uploads/2020/08/LIB-Journals.jpg"}/
+        .card-body
+          %h5.card-title
+            %a.nav-link{href: "https://eiu.edu.vn/kham-pha/doi-ngu-eiu/"} EIU Team
+          %p.card-text This card has supporting text below as a natural lead-in to additional content.
+  
+    .col
+      .card.h-100
+        %img.card-img-top{alt: "...", src: "https://eiu.edu.vn/wp-content/uploads/2021/06/TUA3067-2048x1366.jpg"}/
+        .card-body
+          %h5.card-title
+            %a.nav-link{href: "https://eiu.edu.vn/tuyen-sinh/tai-sao-lua-chon-eiu/"} Education Programs
+          %p.card-text This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.
+  
+  %br
+  
   %hr
-
-//new about school
-%h1
-  .text-center
-    EIU News
-%p
-.row.row-cols-1.row-cols-md-3.g-4
-  .col
-    .card.h-100
-      %img.card-img-top{alt: "...", src: "https://eiu.edu.vn/wp-content/uploads/2021/06/A4A9933-2048x1366.jpg"}/
-      .card-body
-        %h5.card-title 
-          %a.nav-link{href: "https://eiu.edu.vn/tuyen-sinh/tuyen-sinh-2023/hoc-phi-hoc-bong/"} Scholarships And Tuition Fees
-        %p.card-text This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
-
-  .col
-    .card.h-100
-      %img.card-img-top{alt: "...", src: "https://eiu.edu.vn/wp-content/uploads/2020/08/LIB-Journals.jpg"}/
-      .card-body
-        %h5.card-title
-          %a.nav-link{href: "https://eiu.edu.vn/kham-pha/doi-ngu-eiu/"} EIU Team
-        %p.card-text This card has supporting text below as a natural lead-in to additional content.
-
-  .col
-    .card.h-100
-      %img.card-img-top{alt: "...", src: "https://eiu.edu.vn/wp-content/uploads/2021/06/TUA3067-2048x1366.jpg"}/
-      .card-body
-        %h5.card-title
-          %a.nav-link{href: "https://eiu.edu.vn/tuyen-sinh/tai-sao-lua-chon-eiu/"} Education Programs
-        %p.card-text This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.
-
-%br
-
-%hr
-
-// video intro
-%h1
-  .text-center
-    EIU Studying Environment
-%p
-.card{style: "max-width: 2000px"}
-  .row.g-0
-    .col-md-5{style: "position: center; left: 0; right: 0; margin: 0 auto;"} 
-      %h5 EIU Studying Environment
-      %video.img-fluid{autoplay: "", loop: "", muted: ""}
-        %source{src: "https://mdbcdn.b-cdn.net/img/video/forest.mp4", type: "video/mp4"}
-        
-    .col-md-3{style: "padding-top: 0px"}
-      .card{style: "position: center; left: 0; right: 0; margin: 0 auto; max-width: 360px;"}
-        %a{href: "https://eiu.edu.vn/kham-pha/tin-tuc-su-kien/tin-tuc/"}
-          %img.card-img-top{alt: "...", src: "https://eiu.edu.vn/wp-content/uploads/2022/03/website-thumbnail-VI-02-265x355.png"}/
-
-    .col-md-3{style: "padding-top: 0px"}
-      .card{style: "position: center; left: 0; right: 0; margin: 0 auto; max-width: 360px;"}
-        %a{href: "http://becamex.com.vn/"}
-          %img.card-img-top{alt: "...", src: "https://eiu.edu.vn/wp-content/uploads/2022/03/website-thumbnail-VI-01-265x355.png"}/
-// student comments
-
-%p
-%h1
-  .text-center
-    What our students say...
-%p
-
-
-%section.hero-section
-  .card-grid
-    %a.card{href: "#"}
-      .card__background{style: "background-image: url(https://codelearn.io/Themes/TheCodeCampPro/Resources/Images/landing-v2/testimonial/dangquang.jpg)"}
-      .card__content
-        %p.card__category Popular Courses
-        %h3.card__heading Example Card Heading
+  
+  // video intro
+  %h1
+    .text-center EIU Environment
+  %p
+  .card{style: "max-width: 2000px"}
+    .row.g-0
+      .col-md-5{style: "position: center; left: 0; right: 0; margin: 0 auto;"} 
+        %h5.card-title EIU Studying Environment
+        %video.img-fluid{autoplay: "", loop: "", muted: ""}
+          %source{src: "https://mdbcdn.b-cdn.net/img/video/forest.mp4", type: "video/mp4"}
           
-    %a.card{href: "#"}
-      .card__background{style: "background-image: url(https://images.unsplash.com/photo-1557187666-4fd70cf76254?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60)"}
-      .card__content
-        %p.card__category Top rated courses
-        %h3.card__heading Example Card Heading
-    %a.card{href: "#"}
-      .card__background{style: "background-image: url(https://images.unsplash.com/photo-1556680262-9990363a3e6d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60)"}
-      .card__content
-        %p.card__category Latest courses
-        %h3.card__heading Example Card Heading
-    %a.card{href: "#"}
-      .card__background{style: "background-image: url(https://images.unsplash.com/photo-1557004396-66e4174d7bf6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60)"}
-      .card__content
-        %p.card__category Category
-        %h3.card__heading Example Card Heading
-    %div
-
+      .col-md-3{style: "padding-top: 0px"}
+        .card{style: "position: center; left: 0; right: 0; margin: 0 auto; max-width: 360px;"}
+          %a{href: "https://eiu.edu.vn/kham-pha/tin-tuc-su-kien/tin-tuc/"}
+            %img.card-img-top{alt: "...", src: "https://eiu.edu.vn/wp-content/uploads/2022/03/website-thumbnail-VI-02-265x355.png"}/
+  
+      .col-md-3{style: "padding-top: 0px"}
+        .card{style: "position: center; left: 0; right: 0; margin: 0 auto; max-width: 360px;"}
+          %a{href: "http://becamex.com.vn/"}
+            %img.card-img-top{alt: "...", src: "https://eiu.edu.vn/wp-content/uploads/2022/03/website-thumbnail-VI-01-265x355.png"}/
+  // student comments
+  
+  %p
+  %h1
+    .text-center
+      What our students say...
+  %p
+  
+  
+  .container.text-center.my-3
+    .row.mx-auto.my-auto.justify-content-center
+      #recipeCarousel.carousel.slide{"data-bs-ride" => "carousel"}
+        .carousel-inner{role: "listbox"}
+          .carousel-item.active
+            .col-md-3
+              .card
+                .card-img
+                  %img.img-fluid{src: "https://via.placeholder.com/700x500.png/CB997E/333333?text=1"}/
+                /.card-img-overlay Slide 1
+          .carousel-item
+            .col-md-3
+              .card
+                .card-img
+                  %img.img-fluid{src: "https://via.placeholder.com/700x500.png/DDBEA9/333333?text=2"}/
+                /.card-img-overlay Slide 2
+          .carousel-item
+            .col-md-3
+              .card
+                .card-img
+                  %img.img-fluid{src: "https://via.placeholder.com/700x500.png/FFE8D6/333333?text=3"}/
+                /.card-img-overlay Slide 3
+          .carousel-item
+            .col-md-3
+              .card
+                .card-img
+                  %img.img-fluid{src: "https://via.placeholder.com/700x500.png/B7B7A4/333333?text=4"}/
+                /.card-img-overlay Slide 4
+        %a.carousel-control-prev.bg-transparent.w-aut{"data-bs-slide" => "prev", href: "#recipeCarousel", role: "button"}
+          %span.carousel-control-prev-icon{"aria-hidden" => "true"}
+        %a.carousel-control-next.bg-transparent.w-aut{"data-bs-slide" => "next", href: "#recipeCarousel", role: "button"}
+          %span.carousel-control-next-icon{"aria-hidden" => "true"}
 
     
