@@ -75,7 +75,7 @@ gem "aws-sdk-s3", require: false
 gem 'active_storage_validations'
 gem 'image_processing'
 gem 'recaptcha'
-gem "letter_opener", group: :development
+gem "letter_opener"
 gem 'omniauth-google-oauth2' #sign in with google
 gem "omniauth-rails_csrf_protection"
 gem 'wicked_pdf'
