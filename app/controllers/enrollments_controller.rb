@@ -87,6 +87,10 @@ class EnrollmentsController < ApplicationController
       end
     end
   end
+  
+  def self.ransackable_attributes
+    ["comments_count", "confirmation_sent_at", "confirmation_token", "confirmed_at", "courses_count", "created_at", "current_sign_in_at", "current_sign_in_ip", "efresh_token", "email", "encrypted_password", "enrollments_count", "expires", "expires_at", "id", "image", "invitation_accepted_at", "invitation_created_at", "invitation_limit", "invitation_sent_at", "invitation_token", "invitations_count", "invited_by_id", "invited_by_type", "last_sign_in_at", "last_sign_in_ip", "name", "provider", "remember_created_at", "reset_password_sent_at", "reset_password_token", "sign_in_count", "slug", "token", "uid", "unconfirmed_email", "updated_at", "user_lessons_count"]
+  end
 
   private
     def set_coruse

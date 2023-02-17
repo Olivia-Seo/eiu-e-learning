@@ -13,4 +13,8 @@ class Tag < ApplicationRecord
 	  "#{name.to_s}: #{course_tags_count.to_s}"
 	end
 	
+	def self.ransackable_attributes(auth_object = nil)
+    ["course_tags_count", "created_at", "id", "name", "updated_at"]
+  end
+	
 end
