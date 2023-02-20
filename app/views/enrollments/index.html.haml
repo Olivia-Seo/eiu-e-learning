@@ -18,7 +18,7 @@
   = f.search_field :course_title_cont, placeholder: 'course title'
   = f.search_field :course_user_email_cont, placeholder: 'teacher'
   = f.search_field :price_eq, placeholder: 'price'
-  = f.search_field :rating_eq, placeholder: 'rating'
+  /= f.search_field :rating_eq, placeholder: 'rating'
   = f.submit
 = link_to 'refresh', @ransack_path
 
@@ -61,7 +61,7 @@
         %th Certificate
         %th
         %th
-        %th
+
 
     %tbody
       - @enrollments.each do |enrollment|
