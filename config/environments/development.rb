@@ -5,6 +5,7 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: 'https://e21f166e5b034044bfba7566d34fd5a3.vfs.cloud9.ap-northeast-1.amazonaws.com' }
   config.action_mailer.delivery_method = :letter_opener
   config.action_mailer.perform_deliveries = true
+  config.web_console.permissions = '103.17.88.39/16'
 
   # Settings specified here will take precedence over those in config/application.rb.
 

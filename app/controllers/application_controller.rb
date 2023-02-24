@@ -4,7 +4,9 @@ class ApplicationController < ActionController::Base
   
   after_action :user_activity, if: :user_signed_in?
   
-  include Pundit
+  #include Pundit
+  
+  include Pundit::Authorization
   
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 

@@ -24,6 +24,7 @@
         .row
         = f.label :tag
         = f.search_field :course_tags_tag_name_cont, placeholder: 'Tag name', class: 'form-control form-control-sm'
+        /= f.select :course_tags_tag_name_cont, @tags, {include_blank: true}, class: "form-control  form-control-sm"
         .row
         = f.label :language
         .row
@@ -48,7 +49,15 @@
         .row
         = f.submit
       = link_to 'refresh', @ransack_path
-      
+      %hr
+      .row
+      - @tags.each do |tag|
+        = link_to controller: controller_name, action: action_name, courses_search: {course_tags_tag_id_eq: tag.id} do
+          .badge.bg-info
+            = tag.name
+
+      %p
+      %br
       
       
     .col-md-10   

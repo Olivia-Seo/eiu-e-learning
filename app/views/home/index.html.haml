@@ -141,38 +141,15 @@
       What our students say...
   %p
   
-  
-  .container.text-center.my-3
-    .row.mx-auto.my-auto.justify-content-center
-      #recipeCarousel.carousel.slide{"data-bs-ride" => "carousel"}
-        .carousel-inner{role: "listbox"}
-          .carousel-item.active
-            .col-md-3
-              .card
-                .card-img
-                  %img.img-fluid{src: "https://via.placeholder.com/700x500.png/CB997E/333333?text=1"}/
-                /.card-img-overlay Slide 1
-          .carousel-item
-            .col-md-3
-              .card
-                .card-img
-                  %img.img-fluid{src: "https://via.placeholder.com/700x500.png/DDBEA9/333333?text=2"}/
-                /.card-img-overlay Slide 2
-          .carousel-item
-            .col-md-3
-              .card
-                .card-img
-                  %img.img-fluid{src: "https://via.placeholder.com/700x500.png/FFE8D6/333333?text=3"}/
-                /.card-img-overlay Slide 3
-          .carousel-item
-            .col-md-3
-              .card
-                .card-img
-                  %img.img-fluid{src: "https://via.placeholder.com/700x500.png/B7B7A4/333333?text=4"}/
-                /.card-img-overlay Slide 4
-        %a.carousel-control-prev.bg-transparent.w-aut{"data-bs-slide" => "prev", href: "#recipeCarousel", role: "button"}
-          %span.carousel-control-prev-icon{"aria-hidden" => "true"}
-        %a.carousel-control-next.bg-transparent.w-aut{"data-bs-slide" => "next", href: "#recipeCarousel", role: "button"}
-          %span.carousel-control-next-icon{"aria-hidden" => "true"}
-
-    
+  #carouselExampleControls.carousel.slide{"data-bs-ride" => "carousel"}
+    .carousel-inner
+      .carousel-item.active
+        %img.d-block.w-100{alt: "...", src: "https://5starcourses.co.uk/wp-content/uploads/2020/02/3-2.png"}/
+      .carousel-item
+        %img.d-block.w-100{alt: "...", src: "https://5starcourses.co.uk/wp-content/uploads/2020/02/2-2.png"}/
+      .carousel-item
+        %img.d-block.w-100{alt: "...", src: "https://5starcourses.co.uk/wp-content/uploads/2020/02/1-1.png"}/
+    %a.carousel-control-prev.bg-transparent.w-aut{"data-bs-slide" => "prev", "data-bs-target" => "#carouselExampleControls", type: "button"}
+      %span.carousel-control-prev-icon{"aria-hidden" => "true"}
+    %a.carousel-control-next.bg-transparent.w-aut{"data-bs-slide" => "next", "data-bs-target" => "#carouselExampleControls", type: "button"}
+      %span.carousel-control-next-icon{"aria-hidden" => "true"}
