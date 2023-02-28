@@ -1,4 +1,7 @@
 class Course < ApplicationRecord
+  after_initialize :set_defaults, unless: :persisted?
+  
+  
   validates :title,  presence: true
   validates :description, length: { minimum: 5 }
   validates :short_description, length: { maximum: 300 }
@@ -72,4 +75,8 @@ class Course < ApplicationRecord
     ["activities", "avatar_attachment", "avatar_blob", "course_tags", "enrollments", "lessons", "rich_text_description", "tags", "user", "user_lessons"]
   end
   
+  
+  def set_defaults
+    self.approved = false
+  end
 end

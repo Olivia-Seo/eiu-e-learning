@@ -53,6 +53,7 @@ class CoursesController < ApplicationController
     #render 'index'
     @ransack_path = unapproved_courses_path
     @ransack_courses = Course.unapproved.published.ransack(params[:courses_search], search_key: :courses_search)
+    #binding.pry
     @pagy, @courses = pagy(@ransack_courses.result.includes(:user, :course_tags, course_tags: :tag))
     render 'index'
   end
@@ -104,6 +105,7 @@ class CoursesController < ApplicationController
 
   # POST /courses or /courses.json
   def create
+    #binding.pry
     @course = Course.new(course_params)
     authorize @course
     @course.user = current_user
