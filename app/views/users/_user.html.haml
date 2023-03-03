@@ -37,10 +37,11 @@
     %b= 'last_sign_in_ip'.humanize + ":"
     = user.last_sign_in_ip
   .card-footer
-    .fa.fa-graduation-cap
-    Courses created:
-    = user.courses_count
-    .row
+    -if user.courses_count > 0
+      .fa.fa-graduation-cap
+      Courses created:
+      = user.courses_count
+      .row
     .fa.fa-lock-open
     Enrollments:
     = user.enrollments_count  
