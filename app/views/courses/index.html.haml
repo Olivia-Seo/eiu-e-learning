@@ -8,7 +8,7 @@
 
 .container
   .row
-    .col-md-2
+    .col-md-3
       %h3
       .text-center
         .fa.fa-graduation-cap
@@ -22,33 +22,39 @@
         = f.label :title
         = f.search_field :title_cont, placeholder: 'Title', class: 'form-control form-control-sm'
         .row
+        %br
         = f.label :tag
         = f.search_field :course_tags_tag_name_cont, placeholder: 'Tag name', class: 'form-control form-control-sm'
         /= f.select :course_tags_tag_name_cont, @tags, {include_blank: true}, class: "form-control  form-control-sm"
         .row
+        %br
         = f.label :language
         .row
         = f.select :language_cont, Course.languages, {include_blank: true}, class: "form-control  form-control-sm"
         .row
+        %br
         = f.label :level
         .row
         = f.select :level_cont, Course.levels, {include_blank: true}, class: "form-control  form-control-sm"
         .row
+        %br
         = f.label :price
         = f.search_field :price_eq, placeholder: 'Price', class: 'form-control form-control-sm'
+        %br
         = f.label :teacher
         = f.search_field :user_email_cont, placeholder: 'Email', class: 'form-control form-control-sm'
         .row
-        = sort_link(@ransack_courses, :price)
+        %br
+        = sort_link(@ransack_courses, :price, class: "btn btn-outline-info py-1")
         .row
-        = sort_link(@ransack_courses, :average_rating, "Top Rated")
+        = sort_link(@ransack_courses, :average_rating, "Top Rated", class: "btn btn-outline-info my-1")
         .row
-        = sort_link(@ransack_courses, :enrollments_count, "Most Popular")
+        = sort_link(@ransack_courses, :enrollments_count, "Most Popular", class: "btn btn-outline-info py-1")
         .row
-        = sort_link(@ransack_courses, :created_at, "Fresh")
+        = sort_link(@ransack_courses, :created_at, "Newest", class: "btn btn-outline-info py-1 my-1")
         .row
         = f.submit
-      = link_to 'refresh', @ransack_path
+      = link_to 'refresh', @ransack_path, class: "btn btn-outline-success py-1 my-1"
       %hr
       .row
       - @tags.each do |tag|
@@ -60,7 +66,7 @@
       %br
       
       
-    .col-md-10   
+    .col-md-9   
       %section.wrapper
         .container-fostrap
           .content
