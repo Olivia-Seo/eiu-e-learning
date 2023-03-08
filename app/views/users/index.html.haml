@@ -37,7 +37,7 @@
         %th= sort_link(@q, :enrollments_count)
         %th= sort_link(@q, :comments_count)
         %th= sort_link(@q, :user_lessons_count)
-        %th Confirmed?
+        /%th Confirmed?
         %th Roles
     %tbody
       - @users.each do |user|
@@ -59,7 +59,7 @@
           %td= user.enrollments_count
           %td= user.comments_count
           %td= user.user_lessons_count
-          %td= user.confirmed?
+          /%td= user.confirmed?
           %td
             - user.roles.each do |role|
               .badge.bg-info
