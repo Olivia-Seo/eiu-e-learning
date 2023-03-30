@@ -21,14 +21,6 @@ class CoursesController < ApplicationController
   end
 
   def pending_review
-    
-    #@ransack_path = pending_review_courses_path
-    #@ransack_courses = Course.joins(:enrollments).merge(Enrollment.pending_review.where(user: current_user)).ransack(params[:courses_search], search_key: :courses_search)
-    #@pagy, @courses = pagy(@ransack_courses.result.includes(:user, :course_tags, :course_tags => :tag))
-    #@tags = Tag.all.where.not(course_tags_count: 0).order(course_tags_count: :desc)
-    
-    #render 'index'
-    
     @ransack_path = pending_review_courses_path
     @ransack_courses = Course.joins(:enrollments).merge(Enrollment.pending_review.where(user: current_user)).ransack(params[:courses_search], search_key: :courses_search)
     @pagy, @courses = pagy(@ransack_courses.result.includes(:user, :course_tags, course_tags: :tag))
@@ -45,30 +37,19 @@ class CoursesController < ApplicationController
   end
   
   def unapproved
-    
-    #@ransack_path = unapproved_courses_path
-    #@ransack_courses = Course.unapproved.ransack(params[:courses_search], search_key: :courses_search)
-    #@pagy, @courses = pagy(@ransack_courses.result.includes(:user, :course_tags, :course_tags => :tag))
-    #@tags = Tag.all.where.not(course_tags_count: 0).order(course_tags_count: :desc) 
-    #render 'index'
     @ransack_path = unapproved_courses_path
     @ransack_courses = Course.unapproved.published.ransack(params[:courses_search], search_key: :courses_search)
-    #binding.pry
     @pagy, @courses = pagy(@ransack_courses.result.includes(:user, :course_tags, course_tags: :tag))
     render 'index'
   end
 
   def approve
-    #authorize @course, :approve?
-    #@course.update_attribute(:approved, true)
-    #redirect_to @course, notice: "Course approved and visible!"
     authorize @course, :approve? # admin
     if @course.approved?
       @course.update(approved: false)
     else
       @course.update(approved: true)
     end
-    #CourseMailer.approved(@course).deliver_later
     redirect_to @course, notice: "Course approval: #{@course.approved}"
   end
 

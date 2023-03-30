@@ -6,7 +6,7 @@
         .col-md-5
           - if course.avatar.attached?
             = link_to course_path(course) do
-              = image_tag course.avatar, loading: "lazy", height: "auto", width: "40%"
+              = image_tag course.avatar, loading: "lazy", height: "170px", width: "100%"
         .col-md-4
           %b= link_to course.title, course_path(course)
           .text-warning.fa.fa-star
