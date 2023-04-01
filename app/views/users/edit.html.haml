@@ -13,8 +13,8 @@
       = f.error :roles, class: 'text-danger'
       %hr
       - if @user.has_role?(:admin) && @user.has_only_one_admin?
-        .alert.alert-warning
-          You are the only admin for this site. Removing the admin role from this user may lock you out of the system.
+        .alert.alert-danger
+          You are the only admin for this site. You cannot change your role!!!
       = f.button :submit, class: "btn btn-success", id: "submit-btn"
   .card-footer
     = link_to 'Cancel', users_path, class: 'btn btn-danger'
