@@ -14,5 +14,8 @@ class Role < ApplicationRecord
   
   validates :name, presence: true
   validates_uniqueness_of :name
-
+  
+  def self.ransackable_attributes(auth_object = nil)
+    ["created_at", "id", "name", "resource_id", "resource_type", "updated_at"]
+  end
 end

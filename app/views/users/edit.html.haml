@@ -9,9 +9,20 @@
     = @user.email
   .card-body
     = simple_form_for @user do |f|
-      = f.collection_check_boxes :role_ids, Role.all, :id, :name
+      = f.collection_check_boxes :role_ids, Role.where(name: ["admin", "teacher", "student"]), :id, :name 
       = f.error :roles, class: 'text-danger'
       %hr
-      = f.button :submit, class: "btn btn-success"
+      - if @user.has_role?(:admin) && @user.has_only_one_admin?
+        .alert.alert-warning
+          You are the only admin for this site. Removing the admin role from this user may lock you out of the system.
+      = f.button :submit, class: "btn btn-success", id: "submit-btn"
   .card-footer
     = link_to 'Cancel', users_path, class: 'btn btn-danger'
+:javascript
+  const submitBtn = document.getElementById('submit-btn');
+  const isLastAdmin = #{@user.has_only_one_admin?.to_json};
+  
+  if (isLastAdmin) {
+    submitBtn.disabled = true;
+  }
+
