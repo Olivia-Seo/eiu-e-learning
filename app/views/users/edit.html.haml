@@ -3,21 +3,31 @@
   \/
   Edit roles for
   = @user.username
+
 .card
   .card-header
     Editing roles for
     = @user.email
+
   .card-body
     = simple_form_for @user do |f|
-      = f.collection_check_boxes :role_ids, Role.where(name: ["admin", "teacher", "student"]), :id, :name 
-      = f.error :roles, class: 'text-danger'
+      - if @user.has_only_one_admin?
+        - if @user.has_role?(:admin)
+          .alert.alert-danger
+            You are the only admin for this site. You cannot change your role!!!
+          = f.input :role_ids, collection: Role.where(name: ["admin"])
+        - else
+          = f.input :role_ids, collection: Role.where(name: ["teacher", "student"])
+      - else
+        = f.collection_check_boxes :role_ids, Role.where(name: ["admin", "teacher", "student"]), :id, :name 
+        = f.error :roles, class: 'text-danger'
+        
       %hr
-      - if @user.has_role?(:admin) && @user.has_only_one_admin?
-        .alert.alert-danger
-          You are the only admin for this site. You cannot change your role!!!
       = f.button :submit, class: "btn btn-success", id: "submit-btn"
+
   .card-footer
     = link_to 'Cancel', users_path, class: 'btn btn-danger'
+
 :javascript
   const submitBtn = document.getElementById('submit-btn');
   const isLastAdmin = #{@user.has_only_one_admin?.to_json};
@@ -25,4 +35,3 @@
   if (isLastAdmin) {
     submitBtn.disabled = true;
   }
-
